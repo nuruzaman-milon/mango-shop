@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* tailwind utilities class */
+.container {
+  @apply w-4/5 lg:w-2/3 mx-auto;
+}
+
+/* custom css  */
+.active {
+  color: #4ade5f;
+}
