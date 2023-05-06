@@ -1,12 +1,12 @@
 //icon
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { TfiClose } from "react-icons/tfi";
+import { FaTimes } from 'react-icons/fa';
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import NavbarLink from "./NavbarLink";
@@ -26,8 +26,26 @@ const Navbar = () => {
     setDropdownToogle(!dropdownToogle);
   };
 
+  const [prevScrollpos, setPrevScrollpos] = useState(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navBar").style.top = "0";
+      } else {
+        document.getElementById("navBar").style.top = "-200px";
+      }
+      setPrevScrollpos(currentScrollPos);
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollpos]);
+
   return (
-    <div className="bg-black text-white">
+    <div id='navBar' className="bg-black text-white sticky top-0 z-50 transition-all duration-500 ease-out">
       {/******* show items on mobile & tab start *******/}
       <div className="text-basic-color h-20 z-50 flex lg:hidden items-center justify-center relative border-b lg:border-none">
         <div className="flex container items-center justify-between w-full h-full">
@@ -56,8 +74,10 @@ const Navbar = () => {
             className="text-3xl font-bold flex lg:hidden"
           >
             {toogle === false && <GiHamburgerMenu />}
-            {toogle && <TfiClose />}
+            {/* {toogle && <TfiClose />} */}
+            {toogle && <FaTimes />}
           </button>
+        </div>
           {toogle && (
             <div className="block text-black lg:hidden w-full origin-top absolute top-20 shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
               <li className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
@@ -89,7 +109,7 @@ const Navbar = () => {
               </li>
             </div>
           )}
-        </div>
+        {/* </div> */}
       </div>
       {/* show items on mobile & tab end*/}
 
