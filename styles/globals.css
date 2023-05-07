@@ -7,7 +7,74 @@
   @apply w-4/5 lg:w-2/3 mx-auto;
 }
 
+.header-2 {
+  @apply font-semibold text-3xl text-center;
+}
+
+.section-gap {
+  @apply my-6;
+}
+
 /* custom css  */
 .active {
   color: #4ade5f;
+}
+
+/******* home ********/
+
+/* carosel bg  */
+.bg-image-1 {
+  background-image: url("/public/images/carosel1.png");
+  background-size: cover;
+}
+.bg-image-2 {
+  background-image: url("/public/images/carosel2.png");
+  background-size: cover;
+}
+.bg-image-3 {
+  background-image: url("/public/images/carosel3.png");
+  background-size: cover;
+}
+
+/* swiper style  */
+
+#app {
+  height: 100%;
+}
+/* html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+} */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
