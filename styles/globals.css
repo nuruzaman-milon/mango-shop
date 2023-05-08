@@ -11,10 +11,6 @@
   @apply font-semibold text-3xl text-center;
 }
 
-.section-gap {
-  @apply my-6;
-}
-
 /* custom css  */
 .active {
   color: #4ade5f;
@@ -35,6 +31,12 @@
   background-image: url("/public/images/carosel3.png");
   background-size: cover;
 }
+
+/* advertise image  */
+/* .advertise-image-3 {
+  background-image: url("/public/images/carosel3.png");
+  background-size: cover;
+} */
 
 /* swiper style  */
 

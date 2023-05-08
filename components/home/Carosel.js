@@ -41,11 +41,8 @@ export default function Carosel() {
 
   return (
     <>
-      <div className="h-[34rem]">
+      <div className="h-96 md:h-[30rem] lg:h-[34rem]">
         <Swiper
-          //   slidesPerView={
-          //     // windowSize.width < 1024 ? 1 : windowSize.width < 1280 ? 2 : 3
-          //   }
           spaceBetween={40}
           loop={true}
           autoplay={{

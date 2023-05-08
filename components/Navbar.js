@@ -1,9 +1,10 @@
 //icon
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes } from "react-icons/fa";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -44,8 +45,14 @@ const Navbar = () => {
     };
   }, [prevScrollpos]);
 
+  // auth
+  const { data: session } = useSession();
+
   return (
-    <div id='navBar' className="bg-black text-white sticky top-0 z-50 transition-all duration-500 ease-out">
+    <div
+      id="navBar"
+      className="bg-black text-white sticky top-0 z-50 transition-all duration-500 ease-out"
+    >
       {/******* show items on mobile & tab start *******/}
       <div className="text-basic-color h-20 z-50 flex lg:hidden items-center justify-center relative border-b lg:border-none">
         <div className="flex container items-center justify-between w-full h-full">
@@ -78,37 +85,37 @@ const Navbar = () => {
             {toogle && <FaTimes />}
           </button>
         </div>
-          {toogle && (
-            <div className="block text-black lg:hidden w-full origin-top absolute top-20 shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
-              <li className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                <Link href="/">HOME</Link>
-              </li>
-              <li
-                className="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                onClick={() => handleDropdownToogle()}
-              >
-                Mango
-                {dropdownToogle === false && <FaAngleDown />}
-                {dropdownToogle && <FaAngleUp />}
-              </li>
-              {/* dropdown menu for services  */}
-              {dropdownToogle && (
-                <ul className="pl-6">
-                  <NavbarLink className="border-b" />
-                </ul>
-              )}
+        {toogle && (
+          <div className="block text-black lg:hidden w-full origin-top absolute top-20 shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+            <li className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <Link href="/">HOME</Link>
+            </li>
+            <li
+              className="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              onClick={() => handleDropdownToogle()}
+            >
+              Mango
+              {dropdownToogle === false && <FaAngleDown />}
+              {dropdownToogle && <FaAngleUp />}
+            </li>
+            {/* dropdown menu for services  */}
+            {dropdownToogle && (
+              <ul className="pl-6">
+                <NavbarLink className="border-b" />
+              </ul>
+            )}
 
-              <li className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                <Link href="/specials">Specials</Link>
-              </li>
-              <li className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                <Link href="/contact-us">Contact Us</Link>
-              </li>
-              <li className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                <Link href="/login">Login</Link>
-              </li>
-            </div>
-          )}
+            <li className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <Link href="/specials">Specials</Link>
+            </li>
+            <li className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <Link href="/contact-us">Contact Us</Link>
+            </li>
+            <li className="block px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <Link href="/login">Login</Link>
+            </li>
+          </div>
+        )}
         {/* </div> */}
       </div>
       {/* show items on mobile & tab end*/}
@@ -168,26 +175,35 @@ const Navbar = () => {
           >
             <Link href="/contact-us">Contact Us</Link>
           </li>
-          <li
-            className={`${
-              isActive("/login") ? "active" : "hover:text-green-400"
-            } font-semibold`}
-          >
-            <Link href="/login">Login</Link>
-          </li>
+
+          {session?.user ? (
+            <li
+              className={`${
+                isActive("/logout") ? "active" : "hover:text-green-400"
+              } font-semibold`}
+            >
+              <Link onClick={() => signOut()} href="/logout">
+                Logout
+              </Link>
+            </li>
+          ) : (
+            <li
+              className={`${
+                isActive("/login") ? "active" : "hover:text-green-400"
+              } font-semibold`}
+            >
+              <Link onClick={() => signIn()} href="/login">
+                Login
+              </Link>
+            </li>
+          )}
+
           {/* <li
             className={`${
               isActive("/register") ? "active" : "hover:text-green-400"
             } font-semibold`}
           >
             <Link href="/register">Register</Link>
-          </li> */}
-          {/* <li
-            className={`${
-              isActive("/logout") ? "active" : "hover:text-green-400"
-            } font-semibold`}
-          >
-            <Link href="/logout">Logout</Link>
           </li> */}
         </ul>
         <div className="hidden lg:flex">
