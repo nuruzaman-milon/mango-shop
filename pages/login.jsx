@@ -1,21 +1,20 @@
 import Button from "@/components/Button";
 import Layout from "@/components/Layout";
-import { signIn } from "next-auth/react";
 import React, { useState } from "react";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await signIn("credentials", {
-      username: userName,
-      password: password,
-      redirect: true,
-      callbackUrl: "/",
-    });
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   await signIn("credentials", {
+  //     username: userName,
+  //     password: password,
+  //     redirect: true,
+  //     callbackUrl: "/",
+  //   });
+  // };
   //   function handleSubmit(event) {
   //     event.preventDefault();
   //     // console.log(userName, password);

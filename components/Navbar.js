@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
-import { useSession, signIn, signOut } from "next-auth/react";
+// import { useSession, signIn, signOut } from "next-auth/react";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -46,7 +46,7 @@ const Navbar = () => {
   }, [prevScrollpos]);
 
   // auth
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   return (
     <div
@@ -176,7 +176,7 @@ const Navbar = () => {
             <Link href="/contact-us">Contact Us</Link>
           </li>
 
-          {session?.user ? (
+          {/* {session?.user ? (
             <li
               className={`${
                 isActive("/logout") ? "active" : "hover:text-green-400"
@@ -196,7 +196,7 @@ const Navbar = () => {
                 Login
               </Link>
             </li>
-          )}
+          )} */}
 
           {/* <li
             className={`${
